@@ -1,3 +1,31 @@
+window.onload = () => {
+  let nomeMemorizzato = localStorage.getItem("name");
+  if (nomeMemorizzato) {
+    savedName.innerText = nomeMemorizzato;
+  }
+
+  let counterValue = sessionStorage.getItem("time");
+  if (!counterValue) {
+    counterValue = 0;
+    sessionStorage.setItem("time", counterValue);
+  }
+  const updateCounterInDOM = () => {
+    let time = document.getElementById("TimeToDeath");
+    time.innerText = counterValue + " " + "secondi";
+    sessionStorage.setItem("time", counterValue);
+    counterValue++;
+  };
+  setInterval(updateCounterInDOM, 1000);
+
+  //   const YearsCalc = () => {
+  //     let years = document.getElementById("years");
+  //     let timeInSeconds = counterValue;
+  //     let timeInYears = timeInSeconds / (60 * 60 * 24 * 365);
+  //     years.innerText = timeInYears;
+  //   };
+  //   setInterval(YearsCalc, 60000);
+};
+
 const savedName = document.getElementById("savedName");
 
 window.addEventListener("DOMContentLoaded", () => {
@@ -15,25 +43,3 @@ window.addEventListener("DOMContentLoaded", () => {
     savedName.innerText = "";
   });
 });
-
-window.onload = () => {
-  let counterValue = sessionStorage.getItem("time");
-  if (!counterValue) {
-    counterValue = 0;
-    sessionStorage.setItem("time", counterValue);
-  }
-
-  let nomeMemorizzato = localStorage.getItem("name");
-  if (nomeMemorizzato) {
-    savedName.innerText = nomeMemorizzato;
-  }
-
-  const updateCounterInDOM = () => {
-    let time = document.getElementById("TimeToDeath");
-    time.innerText = counterValue;
-    sessionStorage.setItem("time", counterValue);
-    counterValue++;
-  };
-  updateCounterInDOM();
-  setInterval(updateCounterInDOM, 1000);
-};
